@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="white1">#ffffff</color>
+    <color name="white3">#E6ffffff</color> <!-- 10%透明白 -->
+    <color name="grey2">#ebebeb</color> <!-- GridView背景 -->
+    <color name="grey3">#cccccc</color>
+    <color name="black3">#4c4c4c</color>
+    <color name="blue1">#2693FF</color> <!-- 标题背景蓝 -->
+    <color name="blue4">#3F51B5</color> <!-- 列表选中背景蓝 -->
+</resources>

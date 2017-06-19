@@ -1,0 +1,17 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- PopupWindow缩放动画——打开放大，关闭缩小（pivotX="32%"，pivotY="0%"；偏左缩放） -->
+    <style name="mPopupStyle3" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/scale_small_large1</item>
+        <item name="@android:windowExitAnimation">@anim/scale_large_small1</item>
+    </style>
+
+</resources>

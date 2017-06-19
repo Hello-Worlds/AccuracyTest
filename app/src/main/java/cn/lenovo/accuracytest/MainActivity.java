@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private int screenHeight;//屏幕高度：像素
     private int titleHeight;//标题栏高度：像素
 
-
     private int defColumnWidth = 100;//默认像素（列宽）
     private int defColumnHeight = 100;//默认像素（列高）
     private int w, h;//每个小方格的宽高
@@ -75,7 +74,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         screenHeight = Utils.getScreenHeight(this);//屏幕高度：像素
         titleHeight = rl_title.getMeasuredHeight();//标题栏高度：像素
 
-        if (screenWidth > 1000) startPx = 62;
+        if (screenWidth > 1000) {
+            startPx = 64;
+            endPx = 150;
+        }
     }
 
     private void addListener() {

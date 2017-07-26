@@ -3,28 +3,74 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+
     defaultConfig {
         applicationId "cn.lenovo.accuracytest"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 7
-        versionName "7.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            //Bugly相关配置 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
     }
 
-    //打包apk重命名（AccuracyTest-debug-1.0.0.apk）
+    //应用签名
+    signingConfigs {
+        release || debug {
+            keyAlias 'Accuracytest'
+            keyPassword '123456'
+            storeFile file('Accuracytest.jks')
+            storePassword '123456'
+        }
+    }
+
+    //代码混淆、清除无用资源、指定签名信息
+    buildTypes {
+        release {
+            minifyEnabled true //是否混淆
+            zipAlignEnabled true //混淆后的zip优化，该值默认为true
+            shrinkResources true  //是否去除无效的资源文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    //编译libs下的aar包
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    //指定jni路径，使其识别libs下的.so文件（默认只识别src/main/jniLibs下的文件。还有一种方法：把.so文件打包成jar放到libs下）
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    //多渠道打包
+    productFlavors {
+        standard {}
+        xiaomi {}
+        qihoo360 {}
+        baidu {}
+        wandoujia {}
+    }
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [channelName: name]
+    }
+
+    //打包apk重命名（AccuracyTest-release-standard-v1.0.0.apk）
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def name = 'AccuracyTest';
-            if (variant.buildType.name == 'debug') {
-                output.outputFile = new File(output.outputFile.parent, name + "-" + buildType.name + "-" +
-                        defaultConfig.versionName + ".apk");
+            if (buildType.name == 'debug' || buildType.name == 'release') {
+                output.outputFile = new File(output.outputFile.parent,
+                        name + "-" + buildType.name + "-" + variant.productFlavors[0].name + "-v" + defaultConfig.versionName + ".apk");
             }
         }
     }
@@ -32,10 +78,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    //compile 'com.tencent.bugly:crashreport:latest.release'
+    //升级SDK已经集成crash上报功能，需注释掉原来Bugly的jcenter库
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    compile 'com.tencent.bugly:nativecrashreport:latest.release'
 }

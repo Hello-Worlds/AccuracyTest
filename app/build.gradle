@@ -8,8 +8,8 @@ android {
         applicationId "cn.lenovo.accuracytest"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
 
         ndk {
             //Bugly相关配置 设置支持的SO库架构
@@ -30,9 +30,9 @@ android {
     //代码混淆、清除无用资源、指定签名信息
     buildTypes {
         release {
-            minifyEnabled true //是否混淆
+            minifyEnabled false //是否混淆
             zipAlignEnabled true //混淆后的zip优化，该值默认为true
-            shrinkResources true  //是否去除无效的资源文件
+            //shrinkResources true  //是否去除无效的资源文件，需配合混淆使用
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -67,10 +67,11 @@ android {
     //打包apk重命名（AccuracyTest-release-standard-v1.0.0.apk）
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
-            def name = 'AccuracyTest';
             if (buildType.name == 'debug' || buildType.name == 'release') {
-                output.outputFile = new File(output.outputFile.parent,
-                        name + "-" + buildType.name + "-" + variant.productFlavors[0].name + "-v" + defaultConfig.versionName + ".apk");
+                def time = new Date().format("yyyy-MM-dd", TimeZone.getDefault())
+                //def name = "AccuracyTest-${buildType.name}-${variant.productFlavors[0].name}-v${defaultConfig.versionName}-${time}.apk";
+                def name = "AccuracyTest-${time}-v${defaultConfig.versionName}.apk";
+                output.outputFile = new File(output.outputFile.parent, name);
             }
         }
     }
@@ -78,12 +79,13 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.3.1'
 
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
     //compile 'com.tencent.bugly:crashreport:latest.release'
     //升级SDK已经集成crash上报功能，需注释掉原来Bugly的jcenter库
-    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

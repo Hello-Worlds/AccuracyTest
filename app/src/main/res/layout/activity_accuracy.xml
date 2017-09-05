@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white1"
+    tools:context="cn.lenovo.accuracytest.activity.AccuracyActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/blue1">
+
+        <TextView
+            android:id="@+id/tv_choice"
+            android:layout_width="60dp"
+            android:layout_height="26dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/pressed_color_selector_bg_round_white1_grey3"
+            android:gravity="center"
+            android:text="选择尺寸"
+            android:textColor="@color/blue1"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_current_px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/tv_choice"
+            android:text="20 × 20 px"
+            android:textColor="@color/white1"
+            android:textSize="12sp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_current_square"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/tv_current_px"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前方格"
+                android:textColor="@color/white1"
+                android:textSize="8sp"/>
+
+            <TextView
+                android:id="@+id/tv_current_square_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:text="0%"
+                android:textColor="@color/white1"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:id="@+id/tv_current_square_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:text="0"
+                android:textColor="@color/white1"
+                android:textSize="10sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/white1"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_total_num"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_total_num_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="屏幕点击总次数"
+                android:textColor="@color/white1"
+                android:textSize="10sp"/>
+
+            <TextView
+                android:id="@+id/tv_total_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white1"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_reset"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="25dp"
+            android:layout_toStartOf="@+id/ll_total_num"
+            android:background="@drawable/border_blue_grey_round_selector"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="重置"
+            android:textColor="@color/white1"
+            android:textSize="12sp"/>
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/gv_square"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_title"
+        android:background="@android:color/black"
+        android:horizontalSpacing="1px"
+        android:numColumns="auto_fit"
+        android:scrollbars="none"
+        android:verticalSpacing="1px"/>
+</RelativeLayout>

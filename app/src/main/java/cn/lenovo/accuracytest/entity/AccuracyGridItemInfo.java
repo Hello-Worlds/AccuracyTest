@@ -1,10 +1,10 @@
-package cn.lenovo.accuracytest;
+package cn.lenovo.accuracytest.entity;
 
 /**
- * GridView 单个Item信息实体类
+ * 按键进度测试GridView 单个Item信息实体类
  * Created by chao on 2017/6/7.
  */
-public class GridItemInfo {
+public class AccuracyGridItemInfo {
     private int count;
 
     public int getCount() {
@@ -17,6 +17,6 @@ public class GridItemInfo {
 
     @Override
     public String toString() {
-        return "GridItemInfo{" + "count=" + count + '}';
+        return "AccuracyGridItemInfo{" + "count=" + count + '}';
     }
 }

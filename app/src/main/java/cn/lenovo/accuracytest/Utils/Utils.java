@@ -1,4 +1,4 @@
-package cn.lenovo.accuracytest;
+package cn.lenovo.accuracytest.Utils;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package cn.lenovo.accuracytest;
+package cn.lenovo.accuracytest.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,24 +10,27 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import cn.lenovo.accuracytest.R;
+import cn.lenovo.accuracytest.entity.AccuracyGridItemInfo;
+
 /**
  * GridView适配器
  * Created by 周超 on 2017/6/7.
  */
-class GridViewAdapter extends BaseAdapter {
+public class AccuracyGridViewAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<GridItemInfo> list;
+    private ArrayList<AccuracyGridItemInfo> list;
     private int h;//列高
     private int totalClickNum;//总次数
 
-    GridViewAdapter(Context context, ArrayList<GridItemInfo> list, int h, int totalClickNum) {
+    public AccuracyGridViewAdapter(Context context, ArrayList<AccuracyGridItemInfo> list, int h, int totalClickNum) {
         this.context = context;
         this.list = list;
         this.h = h;
         this.totalClickNum = totalClickNum;
     }
 
-    void setData(ArrayList<GridItemInfo> list, int h, int totalClickNum) {
+    public void setData(ArrayList<AccuracyGridItemInfo> list, int h, int totalClickNum) {
         this.list = list;
         this.h = h;
         this.totalClickNum = totalClickNum;
@@ -57,7 +60,7 @@ class GridViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder vh;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.gridview_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.activity_accuracy_gridview_item, parent, false);
             convertView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, h));
             vh = new ViewHolder();
             vh.tv_count = (TextView) convertView.findViewById(R.id.tv_count);
@@ -83,7 +86,7 @@ class GridViewAdapter extends BaseAdapter {
             vh = (ViewHolder) convertView.getTag();
         }
 
-        GridItemInfo info = list.get(position);
+        AccuracyGridItemInfo info = list.get(position);
         vh.tv_count.setText(String.valueOf(info.getCount()));
         if (totalClickNum != 0) {
             vh.tv_percent.setText((info.getCount() * 100 / totalClickNum + "%"));

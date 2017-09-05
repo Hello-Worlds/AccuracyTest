@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="cn.lenovo.accuracytest">
 
+    <!-- 基本用户权限 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/> <!-- 改变WiFi状态 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- 外置存储存取权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> <!-- 写入或读取扩展存储 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/> <!-- 在SD卡中创建与删除文件权限 -->
+
     <!-- Bugly所需权限4条 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -40,6 +46,7 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
 
+        <!-- 入口Activity -->
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape">
@@ -49,6 +56,16 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- 按键精度测试界面 -->
+        <activity
+            android:name=".activity.AccuracyActivity"
+            android:screenOrientation="landscape"/>
+
+        <!-- 计算偏移量Activity -->
+        <activity
+            android:name=".activity.OffsetActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>
